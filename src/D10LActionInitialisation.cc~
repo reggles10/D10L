@@ -1,0 +1,25 @@
+#include "10LActionInitialisation.hh"
+#include "10LPrimaryGeneratorAction.hh"
+#include "10LRunAction.hh"
+#include "10LEventAction.hh"
+#include "10LSteppingAction.hh"
+
+10LActionInitialisation::10LActionInitialisation()
+: G4VUserActionInitialization()
+{}
+
+10LActionInitialisation::~10LActionInitialisation()
+{}
+
+void 10LActionInitialisation::BuildForMaster() const
+{
+  SetUserAction(new 10LPrimaryGeneratorAction);
+
+  10LRunAction * runAction = new 10LRunAction;
+  SetUserAction(runAction);
+
+  10LEventAction * eventAction = new 10LEventAction(runAction);
+  SetUserAction(eventAction);
+
+  SetUserAction(new 10LSteppingAction(eventAction));
+}

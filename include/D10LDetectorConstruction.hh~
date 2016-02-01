@@ -1,0 +1,26 @@
+#ifndef _10LDetectorConstruction_h
+#define _10LDetectorConstruction_h 1
+
+#include "G4VUserDetectorConstruction.hh"
+#include "globals.hh"
+
+class G4PhysicalVolume;
+class G4LogicalVolume;
+
+//Detector Class to define materials and geometry
+
+class D10LDetectorConstruction : public G4VUserDetectorConstruction
+{
+public:
+  D10LDetectorConstruction();
+  virtual ~D10LDetectorConstruction();
+
+  virtual G4PhysicalVolume * Construct();
+  
+  G4LogicalVolume * GetScoringVolume() const {return fScoringVolume;}
+
+protected:
+  G4LogicalVolume * fScoringVolume;
+};
+
+#endif
